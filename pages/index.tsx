@@ -2,7 +2,8 @@ import FileManager from "@/components/FileManager"
 import { Component } from "react"
 
 import Data from "@/assets/Data.json"
-import { FileOrFolder, isFolder } from "@/types/common"
+import { FileOrFolder } from "@/types/common"
+import { filterItems } from "@/utils/utils"
 
 interface AppState {
   systemData: FileOrFolder[]
@@ -11,39 +12,25 @@ interface AppState {
 
 type AppProps = null
 
-const initialData = JSON.parse(JSON.stringify(Data)) as FileOrFolder[]
-
 class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
     this.state = {
-      systemData: initialData,
+      systemData: Data as FileOrFolder[],
       searchFilename: "",
     }
-  }
-
-  filterItems = (value: string, items: FileOrFolder[]) => {
-    return items.filter((item) => {
-      if (isFolder(item)) {
-        const children: FileOrFolder[] = this.filterItems(value, item.children)
-        item.children = children
-        return item.name.includes(value) || children.length
-      } else {
-        return item.name.includes(value)
-      }
-    })
   }
 
   onChangeSearch = (value: string) => {
     this.setState(() => ({ searchFilename: value }))
 
-    const initial = JSON.parse(JSON.stringify(Data)) as FileOrFolder[]
+    const initialData = JSON.parse(JSON.stringify(Data)) as FileOrFolder[]
 
     let newData: FileOrFolder[] = []
     if (!value) {
-      newData = initial
+      newData = initialData
     } else {
-      newData = this.filterItems(value, initial)
+      newData = filterItems(value, initialData)
     }
     this.setState(() => ({ systemData: newData }))
   }

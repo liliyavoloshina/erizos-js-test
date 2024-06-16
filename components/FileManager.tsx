@@ -1,6 +1,5 @@
-import FileComponent from "@/components/File"
-import FolderComponent from "@/components/Folder"
-import { ExpandedFolders, FileOrFolder, isFolder } from "@/types/common"
+import RenderItems from "@/components/RenderItems"
+import { ExpandedFolders, FileOrFolder } from "@/types/common"
 import { Component } from "react"
 
 interface FileManagerProps {
@@ -12,22 +11,15 @@ class FileManager extends Component<FileManagerProps> {
   render() {
     const { data, expandedFolders } = this.props
 
-    return data.map((item, index) => {
-      if (isFolder(item)) {
-        const folderPath = `/${item.name}`
-        return (
-          <FolderComponent
-            key={index}
-            isExpanded={expandedFolders.includes(folderPath)}
-            folderPath={folderPath}
-            expandedFolders={expandedFolders}
-            {...item}
-          />
-        )
-      } else {
-        return <FileComponent key={index} {...item} />
-      }
-    })
+    return (
+      <>
+        <RenderItems
+          items={data}
+          folderPath=""
+          expandedFolders={expandedFolders}
+        />
+      </>
+    )
   }
 }
 

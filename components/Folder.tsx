@@ -1,10 +1,10 @@
-import FileComponent from "@/components/File"
-import { ExpandedFolders, Folder, isFolder } from "@/types/common"
+import { ExpandedFolders, Folder } from "@/types/common"
 import Image from "next/image"
 import { Component } from "react"
 
 import CloseIcon from "@/assets/icons/folder-close.svg"
 import OpenIcon from "@/assets/icons/folder-open.svg"
+import RenderItems from "@/components/RenderItems"
 
 interface FolderState {
   isOpen: boolean
@@ -45,25 +45,11 @@ class FolderComponent extends Component<FolderProps, FolderState> {
         </div>
         {isOpen && (
           <>
-            {children.map((item, index) => {
-              if (isFolder(item)) {
-                const childFolderPath = `${folderPath}/${item.name}`
-                const isChildExpanded =
-                  expandedFolders.includes(childFolderPath)
-
-                return (
-                  <FolderComponent
-                    key={index}
-                    folderPath={childFolderPath}
-                    isExpanded={isChildExpanded}
-                    expandedFolders={expandedFolders}
-                    {...item}
-                  />
-                )
-              } else {
-                return <FileComponent key={index} {...item} />
-              }
-            })}
+            <RenderItems
+              items={children}
+              folderPath={folderPath}
+              expandedFolders={expandedFolders}
+            />
           </>
         )}
       </div>

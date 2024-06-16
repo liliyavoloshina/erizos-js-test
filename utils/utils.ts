@@ -1,17 +1,14 @@
-// import { Folder } from "@/types/common"
+import { FileOrFolder, isFolder } from "@/types/common"
 
-// export const matchFolderPath = (
-//     folder: Folder,
-//     curPath: string
-// ) => {
-//     if (folder.name === )
+export const filterItems = (value: string, items: FileOrFolder[]) => {
+    return items.filter((item) => {
+        if (isFolder(item)) {
+            const children: FileOrFolder[] = filterItems(value, item.children)
+            item.children = children
+            return item.name.includes(value) || children.length
+        } else {
+            return item.name.includes(value)
+        }
+    })
+}
 
-//         console.log('matchFolderPath', expandedFolders)
-//     for (let i = 0; i < expandedFolders.length; i++) {
-//         if (expandedFolders[i].match(curPath)) {
-//             return true
-//         }
-//     }
-
-//     return false
-// }
