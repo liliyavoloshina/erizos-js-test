@@ -41,8 +41,8 @@ class App extends Component<AppProps, AppState> {
 
     return (
       <div className="app container mx-auto p-12">
-        <label className="flex flex-col gap-2 my-12 cursor-pointer">
-          <span className="font-bold">Type filename: </span>
+        <label className="flex flex-col gap-2 max-w-64 my-12 cursor-pointer">
+          <span className="font-bold">Search by filename: </span>
           <input
             type="text"
             value={searchFilename}
