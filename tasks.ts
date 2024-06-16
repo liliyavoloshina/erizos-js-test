@@ -1,7 +1,6 @@
-const ASCII_ZERO_INT = '0'.charCodeAt(0)
-
 // 1.
 const customParseInt = (str: string): number => {
+    const ASCII_ZERO_INT = '0'.charCodeAt(0)
     let res = 0
 
     const asciiValues = [];

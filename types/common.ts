@@ -1,5 +1,3 @@
-
-
 export enum ElementType {
     Folder = 'FOLDER',
     File = 'FIlE'

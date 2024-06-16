@@ -11,4 +11,3 @@ export const filterItems = (value: string, items: FileOrFolder[]) => {
         }
     })
 }
-
