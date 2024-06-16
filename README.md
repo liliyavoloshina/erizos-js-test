@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+❗1st and 2nd tasks are in the file ["/tasks.ts"](tasks.ts)
 
 ## Getting Started
 
